@@ -1,11 +1,19 @@
 const express = require('express')
 const path = require('path')
+const mongoose = require('mongoose')
 const home = require('./routes/home')
 const register = require('./routes/register')
 
+mongoose.connect('mongodb://localhost/sample-store', { useNewUrlParser: true }, (err, data) =>{
+	if (err) {
+		console.log('DB Connection Failed')
+		return
+	}
+
+	console.log('DB Connection Success')
+})
 
 const app = express()
-
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hjs')
 
